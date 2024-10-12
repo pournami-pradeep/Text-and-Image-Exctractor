@@ -6,6 +6,7 @@ from pdf2image import convert_from_path
 
 def handle_uploaded_file(f):
     file_name = f.name
+    os.makedirs("myapp/static/media/")
     with open("myapp/static/media/"+file_name, "wb+") as destination:
         for chunk in f.chunks():
             destination.write(chunk)
