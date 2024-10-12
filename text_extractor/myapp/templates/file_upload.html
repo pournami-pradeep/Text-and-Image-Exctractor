@@ -4,7 +4,6 @@
   
 <div class="row container">
   <div class = "row">
-    <h2 class="my-4">Upload Your File for Text Extraction</h2>
     <form method="post" enctype="multipart/form-data" action = ''>
       {% csrf_token %}
           <input type="file" name="upload_file" accept=".png, .jpeg, .pdf, .jpg" required="required">

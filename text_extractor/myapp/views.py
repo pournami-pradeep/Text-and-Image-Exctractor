@@ -6,7 +6,7 @@ from pdf2image import convert_from_path
 
 def handle_uploaded_file(f):
     file_name = f.name
-    os.makedirs("myapp/static/media/")
+    os.makedirs("myapp/static/media/", exist_ok=True)
     with open("myapp/static/media/"+file_name, "wb+") as destination:
         for chunk in f.chunks():
             destination.write(chunk)
@@ -43,7 +43,7 @@ def upload_file(request):
         if not text:
             extracted_text= "No text available to extract"
         else:
-            extracted_text = "The extracted text is: " + text
+            extracted_text = text
         return render (request,'file_upload.html',{'text': extracted_text})
     return render (request,'file_upload.html' )
 
