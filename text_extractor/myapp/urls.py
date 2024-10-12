@@ -1,2 +1,7 @@
 from django.urls import path
-urlpatterns = []
+from myapp.views import upload_file
+
+urlpatterns = [
+    path('text-extractor',view = upload_file,name = 'text-extractor')
+   
+    ]
