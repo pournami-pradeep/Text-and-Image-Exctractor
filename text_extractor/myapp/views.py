@@ -3,6 +3,7 @@ from django.shortcuts import render
 from PIL import Image 
 from pytesseract import pytesseract
 from pdf2image import convert_from_path
+from django.http import HttpResponse
 
 def handle_uploaded_file(f):
     file_name = f.name
@@ -39,12 +40,15 @@ def upload_file(request):
     text = None
     if request.method == 'POST':
         file_save = handle_uploaded_file(request.FILES['upload_file'])
-        text = check_file(file_save)
-        if not text:
-            extracted_text= "No text available to extract"
-        else:
-            extracted_text = text
-        return render (request,'file_upload.html',{'text': extracted_text})
+        try:
+            text = check_file(file_save)
+            if not text:
+                extracted_text= "No text available to extract"
+            else:
+                extracted_text = text
+            return render (request,'file_upload.html',{'text': extracted_text})
+        except:
+            return render (request,'file_upload.html',{'text': "Something went wrong."})
     return render (request,'file_upload.html' )
 
       
